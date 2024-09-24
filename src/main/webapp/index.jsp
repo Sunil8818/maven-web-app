@@ -4,7 +4,7 @@
   
   <h2> Call Us : +91-9959622140 </h2>
   
-  <h3> Our Ofc Location : Cherlopalle, madanaplle </h3>
+  <h3> Our Ofc Location : Cherlopalle, madanapalle </h3>
 
 
 </body>
