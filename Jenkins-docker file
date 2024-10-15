@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    
+    tools{
+        maven "maven"
+    }
+
+    
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Sunil8818/maven-web-app.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('image') {
+            steps {
+                sh 'docker build -t sunil .'
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh 'docker stop sunilc'
+                sh 'docker rm sunilc'
+                sh 'docker run -d -p 9090:8080 --name sunilc sunil '
+            }
+        }
+    }
+}
