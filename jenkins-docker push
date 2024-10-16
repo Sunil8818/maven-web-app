@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    
+    tools{
+        maven "maven"
+    }
+
+    
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Sunil8818/maven-web-app.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('image') {
+            steps {
+                sh 'docker build -t sunilreddy18/maven_web_app .'
+            }
+        }
+        stage('push') {
+            steps {
+                withDockerRegistry([credentialsId: 'hub_docker', url: '']) {
+                    sh 'docker push sunilreddy18/maven_web_app'  
+}
+            }
+        }
+    }
+}
